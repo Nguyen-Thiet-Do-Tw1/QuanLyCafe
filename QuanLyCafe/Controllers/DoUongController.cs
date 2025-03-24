@@ -75,6 +75,88 @@ public class DoUongController : Controller
         return Json(new { success = true, message = "Thêm đồ uống thành công!", id = newId, imageUrl = "/img/products/" + fileName });
     }
 
+    [HttpDelete]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var doUong = await _context.DoUong.FindAsync(id);
+        if (doUong == null)
+        {
+            return Json(new { success = false, message = "Không tìm thấy đồ uống!" });
+        }
+
+        _context.DoUong.Remove(doUong);
+        await _context.SaveChangesAsync();
+        return Json(new { success = true, message = "Xóa đồ uống thành công!" });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetDrink(string id)
+    {
+        var doUong = await _context.DoUong.FindAsync(id);
+        if (doUong == null)
+        {
+            return Json(new { success = false, message = "Không tìm thấy đồ uống!" });
+        }
+
+        return Json(new
+        {
+            success = true,
+            drink = new
+            {
+                id = doUong.Id,
+                tenDoUong = doUong.TenDoUong,
+                donGia = doUong.DonGia,
+                moTa = doUong.MoTa,
+                maLoai = doUong.MaLoai,
+                hinhAnh = string.IsNullOrEmpty(doUong.HinhAnh) ? null : Url.Content("~/img/products/" + doUong.HinhAnh)
+            }
+        });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateDrink([FromForm] string Id, [FromForm] IFormFile HinhAnh, [FromForm] string TenDoUong, [FromForm] decimal DonGia, [FromForm] string MoTa, [FromForm] string MaLoai)
+    {
+        var doUong = await _context.DoUong.FindAsync(Id);
+        if (doUong == null)
+        {
+            return Json(new { success = false, message = "Không tìm thấy đồ uống!" });
+        }
+
+        doUong.TenDoUong = TenDoUong;
+        doUong.DonGia = DonGia;
+        doUong.MoTa = MoTa;
+        doUong.MaLoai = MaLoai;
+
+        // Nếu có ảnh mới, cập nhật ảnh
+        if (HinhAnh != null && HinhAnh.Length > 0)
+        {
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(HinhAnh.FileName);
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/products", fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await HinhAnh.CopyToAsync(stream);
+            }
+
+            // Xóa ảnh cũ nếu có
+            if (!string.IsNullOrEmpty(doUong.HinhAnh))
+            {
+                string oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/products", doUong.HinhAnh);
+                if (System.IO.File.Exists(oldFilePath))
+                {
+                    System.IO.File.Delete(oldFilePath);
+                }
+            }
+
+            doUong.HinhAnh = fileName;
+        }
+
+        _context.DoUong.Update(doUong);
+        await _context.SaveChangesAsync();
+        return Json(new { success = true, message = "Cập nhật đồ uống thành công!" });
+    }
+
+
 
 
 

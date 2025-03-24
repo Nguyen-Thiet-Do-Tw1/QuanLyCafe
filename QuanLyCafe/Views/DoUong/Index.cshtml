@@ -8,14 +8,12 @@
     <div class="card-header">
         <h3 class="card-title">Danh Sách Đồ Uống</h3>
         <div class="card-tools">
-            <a href="@Url.Action("Create", "DoUong")" class="btn btn-success">
+            <!-- Button mở modal -->
+            <button class="btn btn-success" data-toggle="modal" data-target="#addDrinkModal">
                 <i class="fas fa-plus"></i> Thêm mới
-            </a>
-
-
+            </button>
         </div>
     </div>
-
     <div class="card-body">
         <div class="row mb-3">
             <div class="col-md-6">
@@ -68,14 +66,16 @@
                                     style="width: 60px; height: 60px; object-fit: cover;" />
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", "DoUong", new { id = item.Id })" class="btn btn-sm btn-primary"
+                                <a href="javascript:void(0);" onclick="editDrink('@item.Id')" class="btn btn-sm btn-primary"
                                     title="Sửa">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="@Url.Action("Delete", "DoUong", new { id = item.Id })"
+
+                                <a href="javascript:void(0);" onclick="deleteDrink('@item.Id')"
                                     class="btn btn-sm btn-danger" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </a>
+
                             </td>
                         </tr>
                     }
@@ -114,51 +114,112 @@
     </div>
 </div>
 
-<!-- Button mở modal -->
-<button class="btn btn-success" data-toggle="modal" data-target="#addDrinkModal">
-    <i class="fas fa-plus"></i> Thêm mới
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="addDrinkModal" tabindex="-1" role="dialog" aria-labelledby="addDrinkModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Modal Thêm Đồ Uống -->
+<div class="modal fade" id="addDrinkModal" tabindex="-1" aria-labelledby="addDrinkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="addDrinkModalLabel">Thêm Đồ Uống</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" id="closeModalX" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="drinkForm">
-                    <div class="form-group">
-                        <label>Tên Đồ Uống</label>
-                        <input type="text" id="tenDoUong" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Đơn Giá</label>
-                        <input type="number" id="donGia" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Hình Ảnh</label>
-                        <input type="file" id="hinhAnh" class="form-control">
-                    </div>
+                <form id="drinkForm" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input type="hidden" id="drinkId">
 
-                    <div class="form-group">
-                        <label>Mô Tả</label>
-                        <textarea id="moTa" class="form-control"></textarea>
+                                <label class="form-label">Tên Đồ Uống</label>
+                                <input type="text" id="tenDoUong" class="form-control" required
+                                    placeholder="Nhập tên đồ uống">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Đơn Giá</label>
+                                <input type="number" id="donGia" class="form-control" required placeholder="Nhập giá">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Loại Đồ Uống</label>
+                                <select id="maLoai" class="form-select">
+                                    @foreach (var loai in ViewBag.LoaiDoUongList as List<SelectListItem>)
+                                    {
+                                        <option value="@loai.Value">@loai.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Hình Ảnh</label>
+                                <input type="file" id="hinhAnh" class="form-control" accept="image/*">
+                                <img id="previewImage" class="img-thumbnail mt-2"
+                                    style="width: 100px; height: 100px; display: none;" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mô Tả</label>
+                                <textarea id="moTa" class="form-control" rows="3" placeholder="Nhập mô tả"></textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Loại Đồ Uống</label>
-                        <select id="maLoai" class="form-control">
-                            @foreach (var loai in ViewBag.LoaiDoUongList as List<SelectListItem>)
-                            {
-                                <option value="@loai.Value">@loai.Text</option>
-                            }
-                        </select>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary" id="closeModal">Hủy</button>
+                        <button type="button" class="btn btn-primary" id="btnSaveDrink">Lưu</button>
                     </div>
-                    <button type="button" class="btn btn-primary" id="btnSaveDrink">Lưu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sửa Đồ Uống -->
+<div class="modal fade" id="editDrinkModal" tabindex="-1" aria-labelledby="editDrinkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title" id="editDrinkModalLabel">Sửa Đồ Uống</h5>
+                <button type="button" class="btn-close" id="closeEditModalX" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editDrinkForm" enctype="multipart/form-data">
+                    <input type="hidden" id="editDrinkId">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Tên Đồ Uống</label>
+                                <input type="text" id="editTenDoUong" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Đơn Giá</label>
+                                <input type="number" id="editDonGia" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Loại Đồ Uống</label>
+                                <select id="editMaLoai" class="form-select">
+                                    @foreach (var loai in ViewBag.LoaiDoUongList as List<SelectListItem>)
+                                    {
+                                        <option value="@loai.Value">@loai.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Hình Ảnh</label>
+                                <input type="file" id="editHinhAnh" class="form-control" accept="image/*">
+                                <img id="editPreviewImage" class="img-thumbnail mt-2"
+                                    style="width: 100px; height: 100px; display: none;">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mô Tả</label>
+                                <textarea id="editMoTa" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary" id="closeEditModal">Hủy</button>
+                        <button type="button" class="btn btn-warning" id="btnUpdateDrink">Cập Nhật</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -167,7 +228,32 @@
 
 
 
+
 <script>
+    document.getElementById("hinhAnh").addEventListener("change", function (event) {
+        let file = event.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("previewImage").src = e.target.result;
+                document.getElementById("previewImage").style.display = "block";
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    document.getElementById("editHinhAnh").addEventListener("change", function (event) {
+        let file = event.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("editPreviewImage").src = e.target.result;
+                document.getElementById("editPreviewImage").style.display = "block";
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+
     document.getElementById("btnSaveDrink").addEventListener("click", function () {
         let formData = new FormData();
         formData.append("TenDoUong", document.getElementById("tenDoUong").value);
@@ -194,6 +280,83 @@
             })
             .catch(error => console.error("Lỗi:", error));
     });
+
+    function deleteDrink(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa đồ uống này không?")) {
+            fetch(`/DoUong/Delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        location.reload(); // Tải lại danh sách sau khi xóa
+                    } else {
+                        alert("Lỗi: " + data.message);
+                    }
+                })
+                .catch(error => console.error("Lỗi:", error));
+        }
+    }
+
+    function editDrink(id) {
+        fetch(`/DoUong/GetDrink/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("editDrinkId").value = data.drink.id;
+                    document.getElementById("editTenDoUong").value = data.drink.tenDoUong;
+                    document.getElementById("editDonGia").value = data.drink.donGia;
+                    document.getElementById("editMoTa").value = data.drink.moTa;
+                    document.getElementById("editMaLoai").value = data.drink.maLoai;
+
+                    if (data.drink.hinhAnh) {
+                        document.getElementById("editPreviewImage").src = data.drink.hinhAnh;
+                        document.getElementById("editPreviewImage").style.display = "block";
+                    } else {
+                        document.getElementById("editPreviewImage").style.display = "none";
+                    }
+
+                    $("#editDrinkModal").modal("show");
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(error => console.error("Lỗi:", error));
+    }
+
+    document.getElementById("btnUpdateDrink").addEventListener("click", function () {
+        let formData = new FormData();
+        formData.append("Id", document.getElementById("editDrinkId").value);
+        formData.append("TenDoUong", document.getElementById("editTenDoUong").value);
+        formData.append("DonGia", document.getElementById("editDonGia").value);
+        formData.append("MoTa", document.getElementById("editMoTa").value);
+        formData.append("MaLoai", document.getElementById("editMaLoai").value);
+        let fileInput = document.getElementById("editHinhAnh");
+        if (fileInput.files.length > 0) {
+            formData.append("HinhAnh", fileInput.files[0]);
+        }
+
+        fetch('/DoUong/UpdateDrink', {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(error => console.error("Lỗi:", error));
+    });
+
+
 
 
 

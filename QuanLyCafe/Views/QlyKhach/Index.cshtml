@@ -1,0 +1,55 @@
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Danh sách khách hàng";
+}
+
+<h2 class="mb-3">Danh sách khách hàng</h2>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã KH</th>
+            <th>Tên Khách Hàng</th>
+            <th>Số Điện Thoại</th>
+            <th>Email</th>
+            <th>Địa Chỉ</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kh in Model)
+        {
+            <tr>
+                <td>@kh.Id</td>
+                <td>@kh.TenKhachHang</td>
+                <td>@kh.SoDienThoai</td>
+                <td>@kh.Email</td>
+                <td>@kh.DiaChiGiaoHang</td>
+                <td>
+                    <a href="@Url.Action("Edit", "QlyKhach", new { id = kh.Id })" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="@Url.Action("Delete", "QlyKhach", new { id = kh.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa khách hàng này?');">Xóa</a>
+                    <button class="btn btn-info btn-sm" onclick="loadTaiKhoan('@kh.Id')">Xem Tài Khoản</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal hiển thị tài khoản khách hàng -->
+<div class="modal fade" id="taiKhoanModal" tabindex="-1" aria-labelledby="taiKhoanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="taiKhoanModalLabel">Tài khoản khách hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="taiKhoanContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

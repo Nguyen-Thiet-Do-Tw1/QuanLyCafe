@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using QuanLyCafe.Models;
 
 public class ApplicationDbContext : DbContext
 {
