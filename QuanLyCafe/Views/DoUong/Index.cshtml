@@ -1,0 +1,200 @@
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "_AdminLayout";
+}
+@model PaginatedList<DoUong>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Danh Sách Đồ Uống</h3>
+        <div class="card-tools">
+            <a href="@Url.Action("Create", "DoUong")" class="btn btn-success">
+                <i class="fas fa-plus"></i> Thêm mới
+            </a>
+
+
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form method="get" class="form-inline">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="search" value="@ViewData["CurrentFilter"]" class="form-control"
+                            placeholder="Tìm kiếm đồ uống...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Thông tin phân trang -->
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <p class="text-muted mb-0">
+                    Trang @Model.PageIndex / @Model.TotalPages -
+                    Hiển thị @Model.Count mục (Tổng @Model.TotalCount mục)
+                </p>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th style="width: 100px">Mã</th>
+                        <th>Tên Đồ Uống</th>
+                        <th style="width: 150px">Loại Đồ Uống</th>
+                        <th style="width: 150px">Giá</th>
+                        <th style="width: 100px">Hình Ảnh</th>
+                        <th style="width: 150px">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.TenDoUong</td>
+                            <td>@item.LoaiDoUong?.TenLoai</td>
+                            <td class="text-right">@item.DonGia.ToString("N0") đ</td>
+                            <td class="text-center">
+                                <img src="@Url.Content("~/img/products/" + item.HinhAnh)" class="img-thumbnail"
+                                    style="width: 60px; height: 60px; object-fit: cover;" />
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "DoUong", new { id = item.Id })" class="btn btn-sm btn-primary"
+                                    title="Sửa">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", "DoUong", new { id = item.Id })"
+                                    class="btn btn-sm btn-danger" title="Xóa">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Phân trang -->
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link"
+                        href="@Url.Action("Index", new { page = Model.PageIndex - 1, search = ViewData["CurrentFilter"] })">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                        <a class="page-link"
+                            href="@Url.Action("Index", new { page = i, search = ViewData["CurrentFilter"] })">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link"
+                        href="@Url.Action("Index", new { page = Model.PageIndex + 1, search = ViewData["CurrentFilter"] })">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Button mở modal -->
+<button class="btn btn-success" data-toggle="modal" data-target="#addDrinkModal">
+    <i class="fas fa-plus"></i> Thêm mới
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addDrinkModal" tabindex="-1" role="dialog" aria-labelledby="addDrinkModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDrinkModalLabel">Thêm Đồ Uống</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="drinkForm">
+                    <div class="form-group">
+                        <label>Tên Đồ Uống</label>
+                        <input type="text" id="tenDoUong" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Đơn Giá</label>
+                        <input type="number" id="donGia" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hình Ảnh</label>
+                        <input type="file" id="hinhAnh" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mô Tả</label>
+                        <textarea id="moTa" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Loại Đồ Uống</label>
+                        <select id="maLoai" class="form-control">
+                            @foreach (var loai in ViewBag.LoaiDoUongList as List<SelectListItem>)
+                            {
+                                <option value="@loai.Value">@loai.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btnSaveDrink">Lưu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.getElementById("btnSaveDrink").addEventListener("click", function () {
+        let formData = new FormData();
+        formData.append("TenDoUong", document.getElementById("tenDoUong").value);
+        formData.append("DonGia", document.getElementById("donGia").value);
+        formData.append("MoTa", document.getElementById("moTa").value);
+        formData.append("MaLoai", document.getElementById("maLoai").value);
+        let fileInput = document.getElementById("hinhAnh");
+        if (fileInput.files.length > 0) {
+            formData.append("HinhAnh", fileInput.files[0]); // Thêm file ảnh
+        }
+
+        fetch('/DoUong/CreateDoUong', {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(error => console.error("Lỗi:", error));
+    });
+
+
+
+</script>

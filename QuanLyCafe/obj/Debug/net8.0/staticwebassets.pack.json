@@ -1,0 +1,745 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\QuanLyCafe.bundle.scp.css",
+      "PackagePath": "staticwebassets\\QuanLyCafe.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\banner\\banner-1.jpg",
+      "PackagePath": "staticwebassets\\img\\banner\\banner-1.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-1.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-1.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-10.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-10.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-2.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-2.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-3.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-3.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-4.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-4.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-5.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-5.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-6.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-6.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-7.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-7.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-8.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-8.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\blog-9.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-9.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\details\\blog-details.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\details\\blog-details.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\details\\comment-1.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\details\\comment-1.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\details\\comment-2.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\details\\comment-2.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\details\\comment-3.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\details\\comment-3.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\sidebar\\fp-1.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\sidebar\\fp-1.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\sidebar\\fp-2.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\sidebar\\fp-2.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\blog\\sidebar\\fp-3.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\sidebar\\fp-3.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\categories\\category-1.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\category-1.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\categories\\category-2.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\category-2.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\categories\\category-3.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\category-3.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\categories\\category-4.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\category-4.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\categories\\category-5.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\category-5.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\instagram\\insta-1.jpg",
+      "PackagePath": "staticwebassets\\img\\instagram\\insta-1.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\instagram\\insta-2.jpg",
+      "PackagePath": "staticwebassets\\img\\instagram\\insta-2.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\instagram\\insta-3.jpg",
+      "PackagePath": "staticwebassets\\img\\instagram\\insta-3.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\instagram\\insta-4.jpg",
+      "PackagePath": "staticwebassets\\img\\instagram\\insta-4.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\instagram\\insta-5.jpg",
+      "PackagePath": "staticwebassets\\img\\instagram\\insta-5.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\instagram\\insta-6.jpg",
+      "PackagePath": "staticwebassets\\img\\instagram\\insta-6.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\news\\tt00001.jpg",
+      "PackagePath": "staticwebassets\\img\\news\\tt00001.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\news\\tt00002.jpg",
+      "PackagePath": "staticwebassets\\img\\news\\tt00002.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\news\\tt00003.jpg",
+      "PackagePath": "staticwebassets\\img\\news\\tt00003.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\news\\tt00004.jpg",
+      "PackagePath": "staticwebassets\\img\\news\\tt00004.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\payment\\payment-1.png",
+      "PackagePath": "staticwebassets\\img\\payment\\payment-1.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\payment\\payment-2.png",
+      "PackagePath": "staticwebassets\\img\\payment\\payment-2.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\payment\\payment-3.png",
+      "PackagePath": "staticwebassets\\img\\payment\\payment-3.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\payment\\payment-4.png",
+      "PackagePath": "staticwebassets\\img\\payment\\payment-4.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\payment\\payment-5.png",
+      "PackagePath": "staticwebassets\\img\\payment\\payment-5.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\0db01a4b-1c4f-4293-a2df-5cf35f447f4f.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\0db01a4b-1c4f-4293-a2df-5cf35f447f4f.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\1fa2df2a-f038-40fb-838d-e19d3c65634c.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\1fa2df2a-f038-40fb-838d-e19d3c65634c.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\24b897f5-8968-4456-85c5-661f62afd642.png",
+      "PackagePath": "staticwebassets\\img\\products\\24b897f5-8968-4456-85c5-661f62afd642.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\49b48fe3-88f1-4eeb-bab3-271a2f0ac3d8.psd",
+      "PackagePath": "staticwebassets\\img\\products\\49b48fe3-88f1-4eeb-bab3-271a2f0ac3d8.psd"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\7849a564-7680-4f66-88de-89e60c7a5db5.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\7849a564-7680-4f66-88de-89e60c7a5db5.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\792632.png",
+      "PackagePath": "staticwebassets\\img\\products\\792632.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\a2094ff0-a199-4faa-9c98-c0cfdb4dcd21.png",
+      "PackagePath": "staticwebassets\\img\\products\\a2094ff0-a199-4faa-9c98-c0cfdb4dcd21.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\americano-da.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\americano-da.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\americano-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\americano-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\bac-xiu-da.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\bac-xiu-da.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\bac-xiu-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\bac-xiu-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\banh-flan.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\banh-flan.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\c1d29422-02b5-4967-b07f-533e69a4df09.png",
+      "PackagePath": "staticwebassets\\img\\products\\c1d29422-02b5-4967-b07f-533e69a4df09.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\ca-phe-den-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\ca-phe-den-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\ca-phe-den.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\ca-phe-den.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\ca-phe-sua-da.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\ca-phe-sua-da.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\ca-phe-sua-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\ca-phe-sua-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\cacao-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\cacao-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\capucchino-da.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\capucchino-da.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\capucchino-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\capucchino-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\caramel-macchiato-da.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\caramel-macchiato-da.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\caramel-macchiato-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\caramel-macchiato-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\cold-brew-sua-tuoi.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\cold-brew-sua-tuoi.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\cold-brew-truyen-thong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\cold-brew-truyen-thong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\d9dd312b-8682-4e8e-bc68-8b777e6e0628.png",
+      "PackagePath": "staticwebassets\\img\\products\\d9dd312b-8682-4e8e-bc68-8b777e6e0628.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\dao.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\dao.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\dau-do.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\dau-do.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\espresso-da.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\espresso-da.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\espresso-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\espresso-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\hong-tra-buoi-mat-ong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\hong-tra-buoi-mat-ong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\hong-tra-chanh.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\hong-tra-chanh.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\hong-tra.png",
+      "PackagePath": "staticwebassets\\img\\products\\hong-tra.png"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\kem-pho-mai-macchiato.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\kem-pho-mai-macchiato.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\latte-da.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\latte-da.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\latte-nong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\latte-nong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\matcha-dau-do.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\matcha-dau-do.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\matcha.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\matcha.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\nha-dam.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\nha-dam.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\nuoc-cam-ep.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\nuoc-cam-ep.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\nuoc-dau-ep.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\nuoc-dau-ep.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\nuoc-tao-ep.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\nuoc-tao-ep.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\sinh-to-chanh.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\sinh-to-chanh.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\sinh-to-dau.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\sinh-to-dau.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\sinh-to-xoai.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\sinh-to-xoai.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\sot-caramel.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\sot-caramel.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\sua-chua-dau.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\sua-chua-dau.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\sua-chua-man.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\sua-chua-man.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\sua-tuoi.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\sua-tuoi.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\thach-ca-phe.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\thach-ca-phe.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-chanh.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-chanh.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-dao-buoi.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-dao-buoi.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-dao-dau-tay.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-dao-dau-tay.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-dao-sua.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-dao-sua.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-dao.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-dao.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-dua.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-dua.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-hoa-hong.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-hoa-hong.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-lai.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-lai.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-man-hat-sen.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-man-hat-sen.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-nhan.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-nhan.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-o-long-dau.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-o-long-dau.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-o-long-mang-cau.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-o-long-mang-cau.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-o-long-sua.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-o-long-sua.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-o-long-tran-chau.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-o-long-tran-chau.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-sua-bac-ha.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-sua-bac-ha.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-sua-dau-tay.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-sua-dau-tay.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-sua-matcha.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-sua-matcha.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-sua-o-long.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-sua-o-long.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-sua-pho-mai-tuoi.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-sua-pho-mai-tuoi.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-sua-so-co-la.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-sua-so-co-la.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-sua.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-sua.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-vai.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-vai.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tra-xoai.jpeg",
+      "PackagePath": "staticwebassets\\img\\products\\tra-xoai.jpeg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tran-chau-den.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\tran-chau-den.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\tran-chau-trang.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\tran-chau-trang.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\vai.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\vai.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\whipped-cream.jpg",
+      "PackagePath": "staticwebassets\\img\\products\\whipped-cream.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\shop-cart\\cp-1.jpg",
+      "PackagePath": "staticwebassets\\img\\shop-cart\\cp-1.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\shop-cart\\cp-2.jpg",
+      "PackagePath": "staticwebassets\\img\\shop-cart\\cp-2.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\shop-cart\\cp-3.jpg",
+      "PackagePath": "staticwebassets\\img\\shop-cart\\cp-3.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\shop-cart\\cp-4.jpg",
+      "PackagePath": "staticwebassets\\img\\shop-cart\\cp-4.jpg"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\js\\admin.js",
+      "PackagePath": "staticwebassets\\js\\admin.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.QuanLyCafe.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.QuanLyCafe.props",
+      "PackagePath": "build\\QuanLyCafe.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.QuanLyCafe.props",
+      "PackagePath": "buildMultiTargeting\\QuanLyCafe.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.QuanLyCafe.props",
+      "PackagePath": "buildTransitive\\QuanLyCafe.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
