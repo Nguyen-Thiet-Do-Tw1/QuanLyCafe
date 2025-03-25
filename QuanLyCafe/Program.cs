@@ -43,7 +43,7 @@ app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseMiddleware<RoleMiddleware>();
+// app.UseMiddleware<RoleMiddleware>();
 
 
 app.MapControllerRoute(

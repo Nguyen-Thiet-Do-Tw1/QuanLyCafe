@@ -4197,11 +4197,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WebNC\\QuanLyCafe\\QuanLyCafe\\QuanLyCafe.csproj",
+      "projectUniqueName": "D:\\QuanLyCafe\\QuanLyCafe\\QuanLyCafe.csproj",
       "projectName": "QuanLyCafe",
-      "projectPath": "D:\\WebNC\\QuanLyCafe\\QuanLyCafe\\QuanLyCafe.csproj",
+      "projectPath": "D:\\QuanLyCafe\\QuanLyCafe\\QuanLyCafe.csproj",
       "packagesPath": "C:\\Users\\DONPR\\.nuget\\packages\\",
-      "outputPath": "D:\\WebNC\\QuanLyCafe\\QuanLyCafe\\obj\\",
+      "outputPath": "D:\\QuanLyCafe\\QuanLyCafe\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

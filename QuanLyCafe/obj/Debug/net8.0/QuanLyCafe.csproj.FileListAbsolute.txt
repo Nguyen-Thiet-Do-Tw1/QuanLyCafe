@@ -283,3 +283,4 @@ D:\WebNC\QuanLyCafe\QuanLyCafe\obj\Debug\net8.0\refint\QuanLyCafe.dll
 D:\WebNC\QuanLyCafe\QuanLyCafe\obj\Debug\net8.0\QuanLyCafe.pdb
 D:\WebNC\QuanLyCafe\QuanLyCafe\obj\Debug\net8.0\QuanLyCafe.genruntimeconfig.cache
 D:\WebNC\QuanLyCafe\QuanLyCafe\obj\Debug\net8.0\ref\QuanLyCafe.dll
+D:\QuanLyCafe\QuanLyCafe\obj\Debug\net8.0\QuanLyCafe.sourcelink.json

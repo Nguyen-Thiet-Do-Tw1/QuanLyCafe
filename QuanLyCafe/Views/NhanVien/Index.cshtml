@@ -1,0 +1,183 @@
+@model List<QuanLyCafe.Models.QuanCafe>
+@{
+    ViewData["Title"] = "Danh sách cơ sở quán cafe";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+    <!-- Section: Danh sách cơ sở -->
+    <div class="mb-5">
+        <h4 class="mb-4">Chọn cơ sở quán cafe</h4>
+        <div class="row g-4">
+            @foreach (var quan in Model)
+            {
+                <div class="col-md-6 col-xl-4">
+                    <div class="card card-coso shadow-sm cursor-pointer" 
+                         data-id="@quan.Id"
+                         role="button">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-shape bg-primary-soft text-primary rounded-3 p-3">
+                                    <i class="fas fa-store fa-lg"></i>
+                                </div>
+                                <div class="w-100">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">@quan.TenQuan</h5>
+                                        
+                                    </div>
+                                    <small class="text-muted">Mã cơ sở: @quan.Id</small>
+                                    
+                                    <div class="mt-2 text-truncate">
+                                        <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+                                        <small>@quan.DiaChi</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Section: Danh sách nhân viên -->
+    <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Danh sách nhân viên</h5>
+            <span id="selectedStore" class="badge bg-primary">Vui lòng chọn cơ sở</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="nhanVienTable">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Họ Tên</th>
+                            <th>Địa Chỉ</th>
+                            <th>Ngày Sinh</th>
+                            <th>Giới Tính</th>
+                            <th>Chức Vụ</th>
+                            <th>Số Điện Thoại</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="loadingRow" class="d-none">
+                            <td colspan="4" class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="noDataRow" class="d-none">
+                            <td colspan="4" class="text-center text-muted py-4">
+                                Không có nhân viên nào trong cơ sở này
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-coso {
+        transition: all 0.2s ease;
+        border: 1px solid rgba(0,0,0,0.125);
+    }
+
+    .card-coso:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    }
+
+    .card-coso.active {
+        border-color: var(--bs-primary);
+        background-color: var(--bs-primary-soft);
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .icon-shape {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .text-truncate {
+        max-width: 95%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .badge.bg-primary {
+        padding: 0.4em 0.65em;
+        font-size: 0.85em;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const storeCards = document.querySelectorAll('.card-coso');
+        const loadingRow = document.getElementById('loadingRow');
+        const noDataRow = document.getElementById('noDataRow');
+        const selectedStoreBadge = document.getElementById('selectedStore');
+
+        storeCards.forEach(card => {
+            card.addEventListener('click', function () {
+                // Reset active state
+                storeCards.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                const maQuan = this.dataset.id;
+                const storeName = this.querySelector('h5').textContent;
+                selectedStoreBadge.textContent = storeName;
+
+                // Show loading
+                loadingRow.classList.remove('d-none');
+                noDataRow.classList.add('d-none');
+                document.querySelector('#nhanVienTable tbody').innerHTML = '';
+
+                fetch(`/NhanVien/GetNhanVienByQuan?maQuan=${maQuan}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const tbody = document.querySelector("#nhanVienTable tbody");
+                        tbody.innerHTML = "";
+
+                        if (data.length > 0) {
+                            data.forEach(nv => {
+                                const row = `<tr>
+                                    <td>${nv.hoTen}</td>
+                                    <td>${nv.diaChi}</td>
+                                    <td>${nv.ngaySinh}</td>
+                                    <td>${nv.gioiTinh}</td>
+                                    <td><span class="badge bg-secondary">${nv.chucVu}</span></td>
+                                    <td>${nv.soDienThoai}</td>
+                                    <td>${nv.email}</td>
+                                </tr>`;
+                                tbody.innerHTML += row;
+                            });
+                        } else {
+                            noDataRow.classList.remove('d-none');
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Lỗi tải danh sách nhân viên:", error);
+                        tbody.innerHTML = `<tr>
+                            <td colspan="4" class="text-center text-danger py-4">
+                                Đã xảy ra lỗi khi tải dữ liệu
+                            </td>
+                        </tr>`;
+                    })
+                    .finally(() => {
+                        loadingRow.classList.add('d-none');
+                    });
+            });
+        });
+    });
+</script>

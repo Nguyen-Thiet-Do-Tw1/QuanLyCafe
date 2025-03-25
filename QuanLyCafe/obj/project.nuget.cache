@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NX28m6GuEhq7JuZ0q9LS8eAGBIBvUygx3VvPCtuxnEQZbYzaxCbcnWKP1OQhq5Nrok77wzHIeoDvducNsiBEyQ==",
+  "dgSpecHash": "8qevk9W3Aj48rXHT2mrHVXucDhlYYOKgeNnMhQm09VKyTa9oJYOUdPsL1eoSju/3FTz0UIZTQ8+26sgBc5MpCA==",
   "success": true,
-  "projectFilePath": "D:\\WebNC\\QuanLyCafe\\QuanLyCafe\\QuanLyCafe.csproj",
+  "projectFilePath": "D:\\QuanLyCafe\\QuanLyCafe\\QuanLyCafe.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DONPR\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\DONPR\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

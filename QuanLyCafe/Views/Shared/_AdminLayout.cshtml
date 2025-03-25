@@ -12,10 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
 </head>
-
 <body>
 
     <div class="d-flex">
@@ -36,7 +33,7 @@
                             class="fas fa-receipt"></i> <span>Quản lí hóa đơn</span></a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="QlyKhach" asp-action="Index"><i
                             class="fas fa-user"></i> <span>Quản lí khách hàng</span></a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Feedback" asp-action="Index"><i
+                <li class="nav-item"><a class="nav-link" asp-controller="NhanVien" asp-action="Index"><i
                             class="fas fa-users"></i> <span>Quản lí Nhân viên</span></a></li>
                 <li class="nav-item"><a class="nav-link text-danger" asp-controller="Account" asp-action="Logout"><i
                             class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span></a></li>
@@ -48,8 +45,6 @@
             @RenderBody()
         </main>
     </div>
-
-
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/admin.js"></script>
