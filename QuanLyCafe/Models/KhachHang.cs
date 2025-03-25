@@ -8,21 +8,21 @@ namespace QuanLyCafe.Models
     {
         [Key]
         [Column("MaKhachHang")]
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
         [Column("TenKhachHang")]
-        public string TenKhachHang { get; set; }
+        public required string TenKhachHang { get; set; }
 
         [Column("SDT")]
-        public string SoDienThoai { get; set; }
+        public  required string SoDienThoai { get; set; }
 
         [Column("Email")]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Column("DiaChiGiaoHang")]
-        public string DiaChiGiaoHang { get; set; }
+        public required string DiaChiGiaoHang { get; set; }
 
         // Danh sách tài khoản khách hàng thuộc về khách hàng này
-        public List<TaiKhoanKH> TaiKhoanKHs { get; set; }
+        public List<TaiKhoanKH>? TaiKhoanKHs { get; set; }
     }
 }

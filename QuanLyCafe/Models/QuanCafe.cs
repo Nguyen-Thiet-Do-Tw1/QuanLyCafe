@@ -9,25 +9,25 @@ namespace QuanLyCafe.Models
     {
         [Key]
         [Column("MaQuan")]
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
         [Required]
         [Column("TenQuan")]
-        public string TenQuan { get; set; }
+        public required string TenQuan { get; set; }
 
         [Required]
         [Column("DiaChi")]
-        public string DiaChi { get; set; }
+        public required string DiaChi { get; set; }
 
         [Required]
         [Column("SDT")]
         [StringLength(20)]
-        public string SoDienThoai { get; set; }
+        public required string SoDienThoai { get; set; }
 
         [Column("Email")]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         // Quan hệ một quán cafe có nhiều nhân viên
-        public virtual List<NhanVien> NhanViens { get; set; }
+        public virtual List<NhanVien>? NhanViens { get; set; }
     }
 }
