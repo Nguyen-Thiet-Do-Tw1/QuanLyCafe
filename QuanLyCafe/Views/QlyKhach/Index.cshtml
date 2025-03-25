@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Danh sách khách hàng";
+    Layout = "_AdminLayout";
 }
 
 <h2 class="mb-3">Danh sách khách hàng</h2>
@@ -27,8 +28,10 @@
                 <td>@kh.Email</td>
                 <td>@kh.DiaChiGiaoHang</td>
                 <td>
-                    <a href="@Url.Action("Edit", "QlyKhach", new { id = kh.Id })" class="btn btn-warning btn-sm">Sửa</a>
-                    <a href="@Url.Action("Delete", "QlyKhach", new { id = kh.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa khách hàng này?');">Xóa</a>
+                    <button class="btn btn-warning btn-sm"
+                        onclick="editKhachHangForm('@kh.Id', '@kh.TenKhachHang', '@kh.SoDienThoai', '@kh.Email', '@kh.DiaChiGiaoHang')">Sửa</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteKhachHang('@kh.Id')">Xóa</button>
+
                     <button class="btn btn-info btn-sm" onclick="loadTaiKhoan('@kh.Id')">Xem Tài Khoản</button>
                 </td>
             </tr>
@@ -38,18 +41,297 @@
 
 <!-- Modal hiển thị tài khoản khách hàng -->
 <div class="modal fade" id="taiKhoanModal" tabindex="-1" aria-labelledby="taiKhoanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title" id="taiKhoanModalLabel">Tài khoản khách hàng</h5>
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin tài khoản</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="taiKhoanContent"></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tên tài khoản</th>
+                            <th>Mật khẩu</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taiKhoanContent">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
 </div>
 
 
+<!-- Nút mở modal thêm khách hàng -->
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addKhachHangModal">Thêm Khách Hàng</button>
 
+<!-- Modal thêm khách hàng -->
+<div class="modal fade" id="addKhachHangModal" tabindex="-1" aria-labelledby="addKhachHangModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="addKhachHangModalLabel">Thêm Khách Hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addKhachHangForm">
+                    <div class="mb-3">
+                        <label class="form-label">Tên Khách Hàng</label>
+                        <input type="text" class="form-control" id="TenKhachHang" name="TenKhachHang" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Số Điện Thoại</label>
+                        <input type="text" class="form-control" id="SoDienThoai" name="SoDienThoai" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="Email" name="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Địa Chỉ Giao Hàng</label>
+                        <input type="text" class="form-control" id="DiaChiGiaoHang" name="DiaChiGiaoHang" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal sửa khách hàng -->
+<div class="modal fade" id="editKhachHangModal" tabindex="-1" aria-labelledby="editKhachHangModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title" id="editKhachHangModalLabel">Chỉnh sửa Khách Hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editKhachHangForm">
+                    <input type="hidden" id="editKhachHangId">
+                    <div class="mb-3">
+                        <label class="form-label">Tên Khách Hàng</label>
+                        <input type="text" class="form-control" id="editTenKhachHang" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Số Điện Thoại</label>
+                        <input type="text" class="form-control" id="editSoDienThoai" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Địa Chỉ Giao Hàng</label>
+                        <input type="text" class="form-control" id="editDiaChiGiaoHang" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Cập Nhật</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal thêm tài khoản -->
+<div class="modal fade" id="addTaiKhoanModal" tabindex="-1" aria-labelledby="addTaiKhoanModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="addTaiKhoanModalLabel">Thêm Tài Khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addTaiKhoanForm">
+                    <input type="hidden" id="MaKhachHang" name="MaKhachHang">
+                    <div class="mb-3">
+                        <label class="form-label">Tên tài khoản</label>
+                        <input type="text" class="form-control" id="Username" name="Username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" id="Password" name="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    document.getElementById("addKhachHangForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        let formData = new FormData();
+        formData.append("TenKhachHang", document.getElementById("TenKhachHang").value);
+        formData.append("SoDienThoai", document.getElementById("SoDienThoai").value);
+        formData.append("Email", document.getElementById("Email").value);
+        formData.append("DiaChiGiaoHang", document.getElementById("DiaChiGiaoHang").value);
+        try {
+            let response = await fetch("/QlyKhach/CreateKhachHang", {
+                method: "POST",
+                body: formData
+            });
+
+            let result = await response.json();
+            if (result.success) {
+                alert("Thêm khách hàng thành công!");
+                location.reload();
+            } else {
+                alert("Lỗi: " + result.message);
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra!");
+        }
+    });
+
+    async function deleteKhachHang(id) {
+        if (!confirm("Bạn có chắc muốn xóa khách hàng này?")) return;
+
+        try {
+            let response = await fetch(`/QlyKhach/DeleteKhachHang/${id}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            });
+
+            let result = await response.json();
+            if (result.success) {
+                alert("Xóa khách hàng thành công!");
+                location.reload();
+            } else {
+                alert("Lỗi: " + result.message);
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra!");
+        }
+    }
+
+    function editKhachHangForm(id, ten, sdt, email, diaChi) {
+        document.getElementById("editKhachHangId").value = id;
+        document.getElementById("editTenKhachHang").value = ten;
+        document.getElementById("editSoDienThoai").value = sdt;
+        document.getElementById("editEmail").value = email;
+        document.getElementById("editDiaChiGiaoHang").value = diaChi;
+
+        var editModal = new bootstrap.Modal(document.getElementById("editKhachHangModal"));
+        editModal.show();
+    }
+
+    document.getElementById("editKhachHangForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        let id = document.getElementById("editKhachHangId").value;
+        let updatedKhachHang = {
+            TenKhachHang: document.getElementById("editTenKhachHang").value,
+            SoDienThoai: document.getElementById("editSoDienThoai").value,
+            Email: document.getElementById("editEmail").value,
+            DiaChiGiaoHang: document.getElementById("editDiaChiGiaoHang").value
+        };
+
+        try {
+            let response = await fetch(`/QlyKhach/EditKhachHang/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedKhachHang)
+            });
+
+            let result = await response.json();
+            if (result.success) {
+                alert("Cập nhật khách hàng thành công!");
+                location.reload();
+            } else {
+                alert("Lỗi: " + result.message);
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra!");
+        }
+    });
+
+    async function loadTaiKhoan(id) {
+        try {
+            let response = await fetch(`/QlyKhach/GetTaiKhoanKhachHang/${id}`);
+            let result = await response.json();
+
+            let taiKhoanContent = document.getElementById("taiKhoanContent");
+            taiKhoanContent.innerHTML = "";
+
+            if (result.noAccount) {
+                taiKhoanContent.innerHTML = `<tr><td colspan="2" class="text-center">Chưa có tài khoản cho khách hàng này.</td></tr>`;
+                taiKhoanContent.innerHTML += `
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button class="btn btn-success btn-sm" onclick="themTaiKhoan('${id}')">Thêm tài khoản</button>
+                    </td>
+                </tr>`;
+            } else {
+                result.data.forEach(taiKhoan => {
+                    let row = `<tr>
+                    <td>${taiKhoan.username}</td>
+                    <td>${taiKhoan.password}</td>
+                </tr>`;
+                    taiKhoanContent.innerHTML += row;
+                });
+            }
+
+            let modalElement = document.getElementById("taiKhoanModal");
+            let taiKhoanModal = new bootstrap.Modal(modalElement);
+            taiKhoanModal.show();
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra khi tải tài khoản!");
+        }
+    }
+
+    function themTaiKhoan(maKhachHang) {
+        document.getElementById("MaKhachHang").value = maKhachHang;
+        let addTaiKhoanModal = new bootstrap.Modal(document.getElementById("addTaiKhoanModal"));
+        addTaiKhoanModal.show();
+    }
+
+    document.getElementById("addTaiKhoanForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        let formData = new FormData();
+        formData.append("MaKhachHang", document.getElementById("MaKhachHang").value);
+        formData.append("Username", document.getElementById("Username").value);
+        formData.append("Password", document.getElementById("Password").value);
+
+        try {
+            let response = await fetch("/QlyKhach/ThemTaiKhoan", {
+                method: "POST",
+                body: formData
+            });
+
+            let result = await response.json();
+            if (result.success) {
+                alert("Thêm tài khoản thành công!");
+                location.reload();
+            } else {
+                alert("Lỗi: " + result.message);
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra!");
+        }
+    });
+
+
+
+
+
+
+
+
+
+</script>
