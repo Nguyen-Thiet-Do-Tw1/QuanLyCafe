@@ -41,6 +41,35 @@ public class NhanVienController : Controller
 
         return Json(nhanViens);
     }
+    [HttpGet]
+    public async Task<IActionResult> GetNhanVienById(string id)
+    {
+        var nhanVien = await _context.NhanVien
+            .Where(nv => nv.Id == id)
+            .Select(nv => new
+            {
+                nv.Id,
+                nv.HoTen,
+                nv.DiaChi,
+                nv.NgaySinh,
+                nv.GioiTinh,
+                nv.ChucVu,
+                nv.SoDienThoai,
+                nv.SoCCCD,
+                nv.Email,
+                nv.LuongCoBan,
+                nv.HeSoLuong
+            })
+            .FirstOrDefaultAsync();
+
+        if (nhanVien == null)
+        {
+            return Json(new { success = false, message = "Không tìm thấy nhân viên!" });
+        }
+
+        return Json(new { success = true, nhanVien });
+    }
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -130,6 +159,51 @@ public class NhanVienController : Controller
             return StatusCode(500, new { success = false, message = $"Lỗi: {ex.Message}" });
         }
     }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateNhanVien(
+    [FromForm] string Id,
+    [FromForm] string HoTen,
+    [FromForm] string DiaChi,
+    [FromForm] DateTime? NgaySinh,
+    [FromForm] string GioiTinh,
+    [FromForm] string ChucVu,
+    [FromForm] string SoDienThoai,
+    [FromForm] string SoCCCD,
+    [FromForm] string Email,
+    [FromForm] decimal LuongCoBan,
+    [FromForm] decimal HeSoLuong)
+    {
+        var nhanVien = await _context.NhanVien.FindAsync(Id);
+        if (nhanVien == null)
+        {
+            return Json(new { success = false, message = "Nhân viên không tồn tại!" });
+        }
+
+        try
+        {
+            nhanVien.HoTen = HoTen;
+            nhanVien.DiaChi = DiaChi;
+            nhanVien.NgaySinh = NgaySinh;
+            nhanVien.GioiTinh = GioiTinh;
+            nhanVien.ChucVu = ChucVu;
+            nhanVien.SoDienThoai = SoDienThoai;
+            nhanVien.SoCCCD = SoCCCD;
+            nhanVien.Email = Email;
+            nhanVien.LuongCoBan = LuongCoBan;
+            nhanVien.HeSoLuong = HeSoLuong;
+
+            _context.NhanVien.Update(nhanVien);
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, message = "Cập nhật nhân viên thành công!" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = $"Lỗi: {ex.Message}" });
+        }
+    }
+
 
 
 
