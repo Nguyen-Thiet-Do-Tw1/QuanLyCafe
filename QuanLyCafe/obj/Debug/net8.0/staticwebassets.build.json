@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2jgyAu/d7DUytwy58eIEDDXEJet62cjeHXsqGAZ7M/E=",
+  "Hash": "r9FeqQOClEM6h5WVN8H7tmN0ihcyK/8t8SrorUDP0e8=",
   "Source": "QuanLyCafe",
   "BasePath": "_content/QuanLyCafe",
   "Mode": "Default",
@@ -984,6 +984,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\products\\792632.png"
+    },
+    {
+      "Identity": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\9eceb536-e72f-4125-9435-dcc53d707b52.png",
+      "SourceId": "QuanLyCafe",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\",
+      "BasePath": "_content/QuanLyCafe",
+      "RelativePath": "img/products/9eceb536-e72f-4125-9435-dcc53d707b52.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\products\\9eceb536-e72f-4125-9435-dcc53d707b52.png"
     },
     {
       "Identity": "D:\\QuanLyCafe\\QuanLyCafe\\wwwroot\\img\\products\\a2094ff0-a199-4faa-9c98-c0cfdb4dcd21.png",

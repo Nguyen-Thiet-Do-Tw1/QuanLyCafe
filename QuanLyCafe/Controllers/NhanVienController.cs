@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using QuanLyCafe.Models;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 public class NhanVienController : Controller
 {

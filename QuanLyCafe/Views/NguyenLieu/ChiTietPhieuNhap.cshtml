@@ -1,0 +1,98 @@
+@model PhieuNhapHang
+
+@{
+    ViewData["Title"] = "Chi tiết phiếu nhập";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+    <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-file-invoice me-2"></i>Chi tiết phiếu nhập: @Model.Id</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Ngày lập:</dt>
+                        <dd class="col-sm-8">@Model.NgayLap.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-4">Cơ sở:</dt>
+                        <dd class="col-sm-8">@Model.QuanCafe?.TenQuan</dd>
+
+                        <dt class="col-sm-4">Nhân viên:</dt>
+                        <dd class="col-sm-8">@Model.NhanVien?.HoTen</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Nhà cung cấp:</dt>
+                        <dd class="col-sm-8">@Model.NhaCungCap?.TenNhaCungCap</dd>
+
+                        <dt class="col-sm-4">Trạng thái:</dt>
+                        <dd class="col-sm-8">
+                            <span class="status-badge @GetStatusClass(Model.TrangThai)">
+                                @GetStatusText(Model.TrangThai)
+                            </span>
+                        </dd>
+
+                        <dt class="col-sm-4">Tổng tiền:</dt>
+                        <dd class="col-sm-8 fw-bold text-primary">@Model.TongTien?.ToString("N0") VND</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <h5 class="mb-3">Danh sách nguyên liệu</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Nguyên liệu</th>
+                            <th class="text-end">Số lượng</th>
+                            <th class="text-end">Đơn giá</th>
+                            <th class="text-end">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ct in Model.ChiTietPhieuNhap)
+                        {
+                            <tr>
+                                <td>@ct.NguyenLieu?.TenNguyenLieu</td>
+                                <td class="text-end">@ct.SoLuong.ToString("N2") @ct.NguyenLieu?.DonViTinh</td>
+                                <td class="text-end">@ct.DonGia.ToString("N0")</td>
+                                <td class="text-end fw-bold">@ct.ThanhTien.ToString("N0")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStatusText(byte status) 
+    {
+        return status switch
+        {
+            0 => "Chờ duyệt",
+            1 => "Đã duyệt",
+            2 => "Đã nhận",
+            255 => "Đã hủy", // Giá trị -1 khi cast từ byte sẽ thành 255
+            _ => "Không xác định"
+        };
+    }
+
+    string GetStatusClass(byte status) 
+    {
+        return status switch
+        {
+            0 => "badge bg-secondary",
+            1 => "badge bg-info",
+            2 => "badge bg-success",
+            255 => "badge bg-danger", // Giá trị -1 khi cast từ byte
+            _ => "badge bg-warning"
+        };
+    }
+}

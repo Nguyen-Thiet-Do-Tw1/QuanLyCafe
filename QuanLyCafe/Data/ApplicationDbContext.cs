@@ -13,6 +13,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<LoaiDoUong> LoaiDoUong { get; set; }
     public DbSet<NhanVien> NhanVien { get; set; }
     public DbSet<QuanCafe> QuanCafe { get; set; }
+    public DbSet<NguyenLieu> NguyenLieu { get; set; }
+    public DbSet<PhieuNhapHang> PhieuNhapHang { get; set; }
+    public DbSet<PhieuNhapChiTiet> ChiTietPhieuNhap { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

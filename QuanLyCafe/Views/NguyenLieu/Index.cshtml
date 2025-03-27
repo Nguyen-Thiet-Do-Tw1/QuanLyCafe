@@ -1,0 +1,688 @@
+@model List<QuanLyCafe.Models.QuanCafe>
+@{
+    ViewData["Title"] = "Danh sách cơ sở quán cafe";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+    <!-- Section: Danh sách cơ sở -->
+    <div class="mb-5">
+        <h4 class="mb-4"><i class="fas fa-store me-2"></i>Chọn cơ sở quán cafe</h4>
+        <div class="row g-4">
+@foreach (var quan in Model)
+{
+        <div class="col-md-6 col-xl-4">
+                        <div class="card card-coso shadow-sm cursor-pointer" data-id="@quan.Id" role="button">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="icon-shape bg-primary-soft text-primary rounded-3 p-3">
+                                        <i class="fas fa-store fa-lg"></i>
+                                    </div>
+                                    <div class="w-100">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="mb-0">@quan.TenQuan</h5>
+                                        </div>
+                                        <small class="text-muted">Mã cơ sở: @quan.Id</small>
+                                        <div class="mt-2 text-truncate">
+                                            <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+                                            <small>@quan.DiaChi</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 d-flex justify-content-end gap-2">
+                                        <button class="btn btn-sm btn-outline-info btn-viewdetail" 
+                                                data-id="@quan.Id"
+                                                data-bs-toggle="tooltip" 
+                                                title="Xem chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning btn-edit" 
+                                                data-id="@quan.Id"
+                                                data-bs-toggle="tooltip"
+                                                title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger btn-delete" 
+                                                data-id="@quan.Id"
+                                                data-bs-toggle="tooltip"
+                                                title="Xóa cơ sở">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+}
+                    <!-- Thêm card mới -->
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card card-coso shadow-sm cursor-pointer bg-light" data-bs-toggle="modal"
+                            data-bs-target="#themCoSoModal" style="border: 2px dashed #6c757d;">
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-plus-circle fa-3x"></i>
+                                    <h5 class="mt-2 mb-0">Thêm cơ sở mới</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+            <div class="mb-3 text-end">
+                <a id="btnNhapNL" href="#" class="btn btn-primary rounded-pill shadow-sm d-none"
+                    style="padding: 0.5rem 1.5rem; transition: all 0.3s ease;">
+                    <i class="fas fa-boxes me-2"></i>
+                    Nhập nguyên liệu
+                </a>
+                <a href="@Url.Action("LichSuNhapHang")" class="btn btn-info rounded-pill shadow-sm ms-2"
+                    style="padding: 0.5rem 1.5rem; transition: all 0.3s ease;">
+                    <i class="fas fa-history me-2"></i>
+                    Lịch sử nhập hàng
+                </a>
+            </div>
+
+            <!-- Section: Danh sách nguyenLieu -->
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-box-open me-2 text-primary"></i>Quản lý kho nguyên liệu</h5>
+                    <div>
+                        <span id="selectedStore" class="badge bg-primary me-2">Vui lòng chọn cơ sở</span>
+                    </div>
+                </div>
+
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0" id="nguyenLieuTable">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-4">Nguyên liệu</th>
+                                    <th class="text-end">Tồn kho</th>
+                                    <th>Đơn vị</th>
+                                    <th class="text-end">Đơn giá</th>
+                                    <th>Hạn sử dụng</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="loadingRow" class="d-none">
+                                    <td colspan="6" class="text-center py-5">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="noDataRow" class="d-none">
+                                    <td colspan="6" class="text-center text-muted py-4">
+                                        <i class="fas fa-boxes me-2"></i>Không có nguyên liệu nào trong kho
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+        <!-- Modal Thêm Cơ Sở -->
+        <div class="modal fade" id="themCoSoModal" tabindex="-1" aria-labelledby="themCoSoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title"><i class="fas fa-store me-2"></i>Thêm cơ sở mới</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <form id="themCoSoModalForm">
+                        <div class="modal-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="Id" name="Id" required>
+                                        <label for="Id">Mã cơ sở *</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="TenQuan" name="TenQuan" required>
+                                        <label for="TenQuan">Tên quán *</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="DiaChi" name="DiaChi" required>
+                                        <label for="DiaChi">Địa chỉ *</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="SoDienThoai" name="SoDienThoai" required>
+                                        <label for="SoDienThoai">Số điện thoại *</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="Email" name="Email" required>
+                                        <label for="Email">Email *</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu cơ sở</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Xem Chi Tiết -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Thông tin chi tiết cơ sở</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Mã cơ sở:</dt>
+                    <dd class="col-sm-9" id="detail-id"></dd>
+
+                    <dt class="col-sm-3">Tên quán:</dt>
+                    <dd class="col-sm-9" id="detail-ten"></dd>
+
+                    <dt class="col-sm-3">Địa chỉ:</dt>
+                    <dd class="col-sm-9" id="detail-diachi"></dd>
+
+                    <dt class="col-sm-3">Số điện thoại:</dt>
+                    <dd class="col-sm-9" id="detail-sdt"></dd>
+
+                    <dt class="col-sm-3">Email:</dt>
+                    <dd class="col-sm-9" id="detail-email"></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Chỉnh Sửa -->
+<div class="modal fade" id="editCoSoModal" tabindex="-1" aria-labelledby="editCoSoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Chỉnh sửa cơ sở</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editForm" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="edit-id" name="Id">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="edit-TenQuan" name="TenQuan" required>
+                                <label for="edit-TenQuan">Tên quán *</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="edit-DiaChi" name="DiaChi" required>
+                                <label for="edit-DiaChi">Địa chỉ *</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="tel" class="form-control" id="edit-SoDienThoai" name="SoDienThoai" required>
+                                <label for="edit-SoDienThoai">Số điện thoại *</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="edit-Email" name="Email" required>
+                                <label for="edit-Email">Email *</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-warning">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+        <style>
+            /* Custom Table Styles */
+            #nguyenLieuTable thead th {
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                letter-spacing: 0.5px;
+                border-bottom: 2px solid #e9ecef;
+            }
+
+            #nguyenLieuTable tbody tr {
+                transition: all 0.2s ease;
+                position: relative;
+            }
+
+            .stock-indicator {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                display: inline-block;
+                margin-right: 12px;
+            }
+
+            .status-badge {
+                padding: 0.35rem 0.65rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .text-currency {
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            }
+
+            .card-coso:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                transition: all 0.3s ease;
+            }
+
+            .card-coso.bg-light:hover {
+                background-color: #f8f9fa !important;
+                border-color: var(--bs-primary) !important;
+            }
+            .btn-outline-info { border-color: #0dcaf0; color: #0dcaf0; }
+            .btn-outline-warning { border-color: #ffc107; color: #ffc107; }
+            .btn-outline-danger { border-color: #dc3545; color: #dc3545; }
+
+            .btn-outline-info:hover { background-color: #0dcaf0; color: white; }
+            .btn-outline-warning:hover { background-color: #ffc107; color: black; }
+            .btn-outline-danger:hover { background-color: #dc3545; color: white; }
+
+            .btn-sm { padding: 0.25rem 0.5rem; }
+        </style>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const storeCards = document.querySelectorAll('.card-coso');
+                const loadingRow = document.getElementById('loadingRow');
+                const noDataRow = document.getElementById('noDataRow');
+                const selectedStoreBadge = document.getElementById('selectedStore');
+                const btnNhapNL = document.getElementById('btnNhapNL');
+
+                storeCards.forEach(card => {
+                    card.addEventListener('click', function () {
+                        storeCards.forEach(c => c.classList.remove('active'));
+                        this.classList.add('active');
+
+                        const maQuan = this.dataset.id;
+                        const storeName = this.querySelector('h5').textContent;
+                        selectedStoreBadge.textContent = storeName;
+                        btnNhapNL.href = `/NguyenLieu/NhapNguyenLieu?maQuan=${maQuan}`;
+                        btnNhapNL.classList.remove('d-none');
+
+                        loadingRow.classList.remove('d-none');
+                        noDataRow.classList.add('d-none');
+                        document.querySelector('#nguyenLieuTable tbody').innerHTML = '';
+
+                        fetch(`/NguyenLieu/GetNguyenLieunByQuan?maQuan=${maQuan}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const tbody = document.querySelector("#nguyenLieuTable tbody");
+                                tbody.innerHTML = "";
+
+                                if (data.length > 0) {
+                                    data.forEach(nl => {
+                                        const today = new Date();
+                                        const expDate = new Date(nl.hanSuDung);
+                                        const timeDiff = expDate.getTime() - today.getTime();
+                                        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                                        // Status Logic
+                                        let statusClass = '';
+                                        let statusText = '';
+                                        let rowClass = '';
+
+                                        if (daysDiff <= 7 && daysDiff >= 0) {
+                                            statusClass = 'badge bg-warning';
+                                            statusText = 'Sắp hết hạn';
+                                            rowClass = 'expiring-soon';
+                                        } else if (daysDiff < 0) {
+                                            statusClass = 'badge bg-danger';
+                                            statusText = 'Hết hạn';
+                                            rowClass = 'low-stock';
+                                        } else if (nl.soLuong < nl.soLuongToiThieu) {
+                                            statusClass = 'badge bg-danger';
+                                            statusText = 'Thiếu hàng';
+                                            rowClass = 'low-stock';
+                                        } else {
+                                            statusClass = 'badge bg-success';
+                                            statusText = 'Còn hàng';
+                                            rowClass = 'good-stock';
+                                        }
+
+                                        const row = `
+                                <tr class="${rowClass}">
+                                    <td class="ps-4">
+                                        <div class="d-flex align-items-center">
+                                            <span class="stock-indicator ${statusClass.replace('badge', 'bg')}"></span>
+                                            <div>
+                                                <h6 class="mb-0">${nl.tenNguyenLieu}</h6>
+                                                <small class="text-muted">ID: ${nl.id}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <span class="${nl.soLuong < nl.soLuongToiThieu ? 'text-danger fw-bold' : ''}">
+                                            ${nl.soLuong.toLocaleString()}
+                                        </span>
+                                        <div class="text-muted small">Tối thiểu: ${nl.soLuongToiThieu.toLocaleString()}</div>
+                                    </td>
+                                    <td>${nl.donViTinh}</td>
+                                    <td class="text-end text-currency text-primary">
+                                        ${Number(nl.donGia).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span>${formatDate(nl.hanSuDung)}</span>
+                                            <small class="text-muted">${daysDiff >= 0 ? `Còn ${daysDiff} ngày` : 'Đã hết hạn'}</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge ${statusClass}">${statusText}</span>
+                                    </td>
+                                </tr>`;
+
+                                        tbody.innerHTML += row;
+                                    });
+                                } else {
+                                    noDataRow.classList.remove('d-none');
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Lỗi tải danh sách nguyên liệu:", error);
+                            })
+                            .finally(() => {
+                                loadingRow.classList.add('d-none');
+                            });
+                    });
+                });
+            });
+
+            function formatDate(isoDate) {
+                if (!isoDate) return "N/A";
+                const date = new Date(isoDate);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    // ================ Xử lý thêm mới ================
+    document.getElementById('themCoSoModalForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        Id: document.getElementById('Id').value,
+        TenQuan: document.getElementById('TenQuan').value,
+        DiaChi: document.getElementById('DiaChi').value,
+        SoDienThoai: document.getElementById('SoDienThoai').value,
+        Email: document.getElementById('Email').value
+    };
+
+    try {
+        const response = await fetch('/QuanCafe/ThemCoSo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        // Xử lý response mới
+        if (response.status === 201) {
+            const newStore = await response.json();
+            addNewStoreCard(newStore);
+
+            const modalElement = document.getElementById('themCoSoModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            
+            // 1. Ẩn modal
+            modal.hide();
+            
+            // 2. Xóa backdrop 
+            document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+                backdrop.remove();
+            });
+            
+            // 3. Reset form và body class
+            this.reset();
+            document.body.classList.remove('modal-open');
+            document.body.style.paddingRight = ''; // Xóa padding do Bootstrap thêm
+            
+            // 4. Xóa modal khỏi DOM
+            modalElement.remove();
+            alert('Thêm cơ sở thành công!');
+
+        } else {
+            const error = await response.json();
+            throw new Error(error.error);
+        }
+    } catch (error) {
+        alert(error.message);
+    }
+});
+// ================ Xử lý xem chi tiết (Event Delegation) ================
+document.querySelector('.row.g-4').addEventListener('click', async function(e) {
+    const btnViewDetail = e.target.closest('.btn-viewdetail');
+    if (!btnViewDetail) return;
+
+    const maQuan = btnViewDetail.dataset.id;
+    
+    try {
+        // Hiển thị loading indicator nếu cần
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'spinner-border text-primary';
+        document.getElementById('detailModal').querySelector('.modal-body').appendChild(loadingIndicator);
+
+        // Gọi API lấy thông tin chi tiết
+        const response = await fetch(`/QuanCafe/ChiTietCoSo/${maQuan}`);
+        if (!response.ok) throw new Error('Không tải được dữ liệu');
+        
+        const data = await response.json();
+
+        // Điền dữ liệu vào modal
+        document.getElementById('detail-id').textContent = data.id;
+        document.getElementById('detail-ten').textContent = data.tenQuan;
+        document.getElementById('detail-diachi').textContent = data.diaChi;
+        document.getElementById('detail-sdt').textContent = data.soDienThoai;
+        document.getElementById('detail-email').textContent = data.email;
+
+        // Hiển thị modal
+        new bootstrap.Modal(document.getElementById('detailModal')).show();
+    } catch (error) {
+        alert('Không thể tải thông tin chi tiết: ' + error.message);
+    } finally {
+        // Xóa loading indicator
+        const loadingIndicator = document.getElementById('detailModal').querySelector('.spinner-border');
+        if (loadingIndicator) loadingIndicator.remove();
+    }
+});
+
+// ================ Xử lý chỉnh sửa ================
+document.getElementById('editForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        Id: document.getElementById('edit-id').value,
+        TenQuan: document.getElementById('edit-TenQuan').value,
+        DiaChi: document.getElementById('edit-DiaChi').value,
+        SoDienThoai: document.getElementById('edit-SoDienThoai').value,
+        Email: document.getElementById('edit-Email').value
+    };
+
+    try {
+        const response = await fetch('/QuanCafe/EditCoSo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(result.error || 'Cập nhật thất bại');
+        }
+
+        // Cập nhật card trong DOM với dữ liệu mới
+        updateStoreCard(result.data);
+        
+        // Đóng modal và xóa backdrop
+        const modal = bootstrap.Modal.getInstance(document.getElementById('editCoSoModal'));
+        modal.hide();
+        document.querySelector('.modal-backdrop').remove();
+        
+        alert('Cập nhật thành công!');
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+    // ================ Xử lý xóa (Dùng Event Delegation) ================
+document.querySelector('.row.g-4').addEventListener('click', async function(e) {
+    const btnDelete = e.target.closest('.btn-delete');
+    if (!btnDelete) return;
+
+    const maQuan = btnDelete.dataset.id;
+    if (!confirm('Bạn có chắc chắn muốn xóa cơ sở này?')) return;
+
+    try {
+        const response = await fetch(`/QuanCafe/XoaCoSo/${maQuan}`, { 
+            method: 'POST' 
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Xóa thất bại');
+        
+        removeStoreCard(maQuan);
+        alert('Xóa thành công!');
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+    // ================ Các hàm hỗ trợ ================
+    function addNewStoreCard(store) {
+        const cardHtml = `
+        <div class="col-md-6 col-xl-4">
+            <div class="card card-coso shadow-sm cursor-pointer" data-id="${store.id}" role="button">
+                <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon-shape bg-primary-soft text-primary rounded-3 p-3">
+                            <i class="fas fa-store fa-lg"></i>
+                        </div>
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">${store.tenQuan}</h5>
+                            </div>
+                            <small class="text-muted">Mã cơ sở: ${store.id}</small>
+                            <div class="mt-2 text-truncate">
+                                <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+                                <small>${store.diaChi}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-end gap-2">
+                        <button class="btn btn-sm btn-outline-info btn-viewdetail" 
+                            data-id="${store.id}"
+                            data-bs-toggle="tooltip" 
+                            title="Xem chi tiết">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning btn-edit" 
+                                data-id="${store.id}"
+                                data-bs-toggle="tooltip"
+                                title="Chỉnh sửa">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger btn-delete" 
+                                data-id="${store.id}"
+                                data-bs-toggle="tooltip"
+                                title="Xóa cơ sở">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+        
+       // Tìm card "Thêm cơ sở mới" (card cuối cùng)
+    const addNewCard = document.querySelector('.row.g-4 > .col-md-6.col-xl-4:last-child');
+    
+    // Chèn card mới vào TRƯỚC card "Thêm cơ sở mới"
+    if (addNewCard) {
+        addNewCard.insertAdjacentHTML('beforebegin', cardHtml);
+    } else {
+        // Fallback: Nếu không tìm thấy, chèn vào cuối container
+        const container = document.querySelector('.row.g-4');
+        container.insertAdjacentHTML('beforeend', cardHtml);
+    }
+    
+}
+
+    function updateStoreCard(store) {
+        const card = document.querySelector(`.card-coso[data-id="${store.id}"]`);
+        if (card) {
+            card.querySelector('h5').textContent = store.tenQuan;
+            card.querySelector('.text-muted').textContent = `Mã cơ sở: ${store.id}`;
+            card.querySelector('small').textContent = store.diaChi;
+        }
+    }
+
+    function removeStoreCard(maQuan) {
+        const cardWrapper = document.querySelector(`.col-md-6.col-xl-4 [data-id="${maQuan}"]`).closest('.col-md-6.col-xl-4');
+        if (cardWrapper) {
+            cardWrapper.remove();
+        }
+    }
+
+    // ================ Xử lý mở modal chỉnh sửa ================
+    document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const maQuan = this.dataset.id;
+            
+            try {
+                const response = await fetch(`/QuanCafe/ChiTietCoSo/${maQuan}`);
+                if (!response.ok) throw new Error('Không tải được dữ liệu');
+                
+                const data = await response.json();
+                
+                document.getElementById('edit-id').value = data.id;
+                document.getElementById('edit-TenQuan').value = data.tenQuan;
+                document.getElementById('edit-DiaChi').value = data.diaChi;
+                document.getElementById('edit-SoDienThoai').value = data.soDienThoai;
+                document.getElementById('edit-Email').value = data.email;
+
+                new bootstrap.Modal(document.getElementById('editCoSoModal')).show();
+            } catch (error) {
+                alert('Không thể tải thông tin cơ sở');
+            }
+        });
+    });
+});
+
+            
+</script>

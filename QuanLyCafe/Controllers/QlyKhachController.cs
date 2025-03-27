@@ -20,7 +20,7 @@ namespace QuanLyCafe.Controllers
             var khachHangs = await _context.KhachHang.ToListAsync();
             return View(khachHangs);
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> CreateKhachHang([FromForm] string TenKhachHang, [FromForm] string SoDienThoai, [FromForm] string Email, [FromForm] string DiaChiGiaoHang)
         {

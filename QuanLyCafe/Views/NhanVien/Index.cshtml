@@ -58,7 +58,7 @@
                 <table class="table table-hover align-middle mb-0" id="nhanVienTable">
                     <thead class="bg-light">
                         <tr>
-                            <th class="d-none" >ID</th>
+                            <th class="d-none">ID</th>
                             <th>Họ Tên</th>
                             <th>Địa Chỉ</th>
                             <th>Ngày Sinh</th>
@@ -191,75 +191,92 @@
 
 <!-- Modal Chỉnh Sửa Nhân Viên -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Chỉnh Sửa Nhân Viên</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title"><i class="fas fa-user-edit me-2"></i>Chỉnh Sửa Nhân Viên</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editForm">
+                <form id="editForm" class="needs-validation" novalidate>
                     <input type="hidden" id="editId">
-
-                    <div class="mb-3">
-                        <label for="editHoTen" class="form-label">Họ và Tên</label>
-                        <input type="text" class="form-control" id="editHoTen" required>
+                    <div class="row g-3">
+                        <!-- Cột Trái -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="editHoTen" required>
+                                <label for="editHoTen"><i class="fas fa-user me-2 text-muted"></i>Họ tên *</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input type="date" class="form-control" id="editNgaySinh" required>
+                                <label for="editNgaySinh"><i class="fas fa-calendar-day me-2 text-muted"></i>Ngày sinh
+                                    *</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <select class="form-select" id="editGioiTinh" required>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                                <label for="editGioiTinh"><i class="fas fa-venus-mars me-2 text-muted"></i>Giới tính
+                                    *</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input type="text" class="form-control" id="editSoCCCD" required>
+                                <label for="editSoCCCD"><i class="fas fa-id-card me-2 text-muted"></i>Số CCCD *</label>
+                            </div>
+                        </div>
+                        <!-- Cột Phải -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="editChucVu" required>
+                                <label for="editChucVu"><i class="fas fa-briefcase me-2 text-muted"></i>Chức vụ
+                                    *</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input type="tel" class="form-control" id="editSoDienThoai" required>
+                                <label for="editSoDienThoai"><i class="fas fa-phone me-2 text-muted"></i>Số điện thoại
+                                    *</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input type="email" class="form-control" id="editEmail">
+                                <label for="editEmail"><i class="fas fa-envelope me-2 text-muted"></i>Email</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input type="number" class="form-control" id="editLuongCoBan" required>
+                                <label for="editLuongCoBan"><i class="fas fa-coins me-2 text-muted"></i>Lương cơ bản
+                                    *</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input type="number" class="form-control" id="editHeSoLuong" step="0.1" required>
+                                <label for="editHeSoLuong"><i class="fas fa-percent me-2 text-muted"></i>Hệ số lương
+                                    *</label>   
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="editDiaChi" class="form-label">Địa Chỉ</label>
-                        <input type="text" class="form-control" id="editDiaChi">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="editDiaChi" style="height: 80px"></textarea>
+                                <label for="editDiaChi"><i class="fas fa-map-marker-alt me-2 text-muted"></i>Địa
+                                    chỉ</label>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="editNgaySinh" class="form-label">Ngày Sinh</label>
-                        <input type="date" class="form-control" id="editNgaySinh">
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Đóng
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="updateNhanVien()">
+                            <i class="fas fa-save me-2"></i>Lưu thay đổi
+                        </button>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="editGioiTinh" class="form-label">Giới Tính</label>
-                        <select class="form-control" id="editGioiTinh">
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="editChucVu" class="form-label">Chức Vụ</label>
-                        <input type="text" class="form-control" id="editChucVu">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="editSoDienThoai" class="form-label">Số Điện Thoại</label>
-                        <input type="text" class="form-control" id="editSoDienThoai">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="editSoCCCD" class="form-label">Số CCCD</label>
-                        <input type="text" class="form-control" id="editSoCCCD">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="editEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="editEmail">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="editLuongCoBan" class="form-label">Lương Cơ Bản</label>
-                        <input type="number" class="form-control" id="editLuongCoBan">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="editHeSoLuong" class="form-label">Hệ Số Lương</label>
-                        <input type="number" class="form-control" id="editHeSoLuong" step="0.1">
-                    </div>
-
-                    <button type="button" class="btn btn-primary" onclick="updateNhanVien()">Lưu Thay Đổi</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Modal Xem Chi Tiết -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
