@@ -1,5 +1,4 @@
 @model PhieuNhapHang
-
 @{
     ViewData["Title"] = "Chi tiết phiếu nhập";
     Layout = "_AdminLayout";
@@ -7,49 +6,35 @@
 
 <div class="container-fluid py-4">
     <div class="card shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0"><i class="fas fa-file-invoice me-2"></i>Chi tiết phiếu nhập: @Model.Id</h5>
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Chi tiết phiếu nhập @Model.Id</h5>
         </div>
 
         <div class="card-body">
+            <!-- Thông tin chung -->
             <div class="row mb-4">
-                <div class="col-md-6">
-                    <dl class="row">
-                        <dt class="col-sm-4">Ngày lập:</dt>
-                        <dd class="col-sm-8">@Model.NgayLap.ToString("dd/MM/yyyy HH:mm")</dd>
-
-                        <dt class="col-sm-4">Cơ sở:</dt>
-                        <dd class="col-sm-8">@Model.QuanCafe?.TenQuan</dd>
-
-                        <dt class="col-sm-4">Nhân viên:</dt>
-                        <dd class="col-sm-8">@Model.NhanVien?.HoTen</dd>
-                    </dl>
+                <div class="col-md-4">
+                    <label class="form-label">Ngày lập:</label>
+                    <p class="form-control-static">@Model.NgayLap.ToString("dd/MM/yyyy HH:mm")</p>
                 </div>
-                <div class="col-md-6">
-                    <dl class="row">
-                        <dt class="col-sm-4">Nhà cung cấp:</dt>
-                        <dd class="col-sm-8">@Model.NhaCungCap?.TenNhaCungCap</dd>
-
-                        <dt class="col-sm-4">Trạng thái:</dt>
-                        <dd class="col-sm-8">
-                            <span class="status-badge @GetStatusClass(Model.TrangThai)">
-                                @GetStatusText(Model.TrangThai)
-                            </span>
-                        </dd>
-
-                        <dt class="col-sm-4">Tổng tiền:</dt>
-                        <dd class="col-sm-8 fw-bold text-primary">@Model.TongTien?.ToString("N0") VND</dd>
-                    </dl>
+                <div class="col-md-4">
+                    <label class="form-label">Nhà cung cấp:</label>
+                    <p class="form-control-static">@Model.NhaCungCap?.TenNhaCungCap</p>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Người lập:</label>
+                    <p class="form-control-static">@Model.NhanVien?.HoTen</p>
                 </div>
             </div>
 
-            <h5 class="mb-3">Danh sách nguyên liệu</h5>
+            <!-- Danh sách nguyên liệu -->
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="bg-light">
                         <tr>
                             <th>Nguyên liệu</th>
                             <th class="text-end">Số lượng</th>
+                            <th>Đơn vị</th>
                             <th class="text-end">Đơn giá</th>
                             <th class="text-end">Thành tiền</th>
                         </tr>
@@ -58,41 +43,29 @@
                         @foreach (var ct in Model.ChiTietPhieuNhap)
                         {
                             <tr>
-                                <td>@ct.NguyenLieu?.TenNguyenLieu</td>
-                                <td class="text-end">@ct.SoLuong.ToString("N2") @ct.NguyenLieu?.DonViTinh</td>
+                                <td>@ct.NguyenLieu.TenNguyenLieu</td>
+                                <td class="text-end">@ct.SoLuong.ToString("N0")</td>
+                                <td>@ct.NguyenLieu.DonViTinh</td>
                                 <td class="text-end">@ct.DonGia.ToString("N0")</td>
-                                <td class="text-end fw-bold">@ct.ThanhTien.ToString("N0")</td>
+                                <td class="text-end">@ct.ThanhTien.ToString("N0") VND</td>
                             </tr>
                         }
                     </tbody>
+                    <tfoot>
+                        <tr class="fw-bold">
+                            <td colspan="4" class="text-end">Tổng cộng:</td>
+                            <td class="text-end">@Model.TongTien?.ToString("N0") VND</td>
+                        </tr>
+                    </tfoot>
                 </table>
+            </div>
+
+            <!-- Nút quay lại -->
+            <div class="mt-4">
+                <a href="@Url.Action("DanhSachPhieuNhap", new { maQuan = Model.MaQuan })" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                </a>
             </div>
         </div>
     </div>
 </div>
-
-@functions {
-    string GetStatusText(byte status) 
-    {
-        return status switch
-        {
-            0 => "Chờ duyệt",
-            1 => "Đã duyệt",
-            2 => "Đã nhận",
-            255 => "Đã hủy", // Giá trị -1 khi cast từ byte sẽ thành 255
-            _ => "Không xác định"
-        };
-    }
-
-    string GetStatusClass(byte status) 
-    {
-        return status switch
-        {
-            0 => "badge bg-secondary",
-            1 => "badge bg-info",
-            2 => "badge bg-success",
-            255 => "badge bg-danger", // Giá trị -1 khi cast từ byte
-            _ => "badge bg-warning"
-        };
-    }
-}

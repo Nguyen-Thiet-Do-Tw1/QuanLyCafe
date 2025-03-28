@@ -29,7 +29,7 @@
                             <th class="text-center">Hành động</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="customerList">
                         @foreach (var kh in Model)
                         {
                             <tr>
@@ -49,7 +49,7 @@
                                 <td>
                                     <div class="d-flex gap-2 justify-content-center">
                                         <button class="btn btn-sm btn-outline-warning" title="Chỉnh sửa"
-                                            onclick="editKhachHangForm('@kh.Id', '@kh.TenKhachHang', '@kh.SoDienThoai', '@kh.Email', '@kh.DiaChiGiaoHang')">
+                                            onclick="editKhachHangForm('@kh.Id')">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="btn btn-sm btn-outline-danger" onclick="deleteKhachHang('@kh.Id')">
@@ -149,27 +149,27 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-warning text-white">
-                <h5 class="modal-title" id="editKhachHangModalLabel">Chỉnh sửa Khách Hàng</h5>
+                <h5 class="modal-title">Chỉnh sửa Khách Hàng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editKhachHangForm">
-                    <input type="hidden" id="editKhachHangId">
+                    <input type="hidden" id="editKhachHangId" name="Id">
                     <div class="mb-3">
                         <label class="form-label">Tên Khách Hàng</label>
-                        <input type="text" class="form-control" id="editTenKhachHang" required>
+                        <input type="text" class="form-control" id="editTenKhachHang" name="TenKhachHang" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Số Điện Thoại</label>
-                        <input type="text" class="form-control" id="editSoDienThoai" required>
+                        <input type="text" class="form-control" id="editSoDienThoai" name="SoDienThoai" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="editEmail" required>
+                        <input type="email" class="form-control" id="editEmail" name="Email">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Địa Chỉ Giao Hàng</label>
-                        <input type="text" class="form-control" id="editDiaChiGiaoHang" required>
+                        <input type="text" class="form-control" id="editDiaChiGiaoHang" name="DiaChiGiaoHang">
                     </div>
                     <button type="submit" class="btn btn-success">Cập Nhật</button>
                 </form>
@@ -207,96 +207,65 @@
 
 <script>
 
-    document.getElementById("addKhachHangForm").addEventListener("submit", async function (event) {
-        event.preventDefault();
-
-        let formData = new FormData();
-        formData.append("TenKhachHang", document.getElementById("TenKhachHang").value);
-        formData.append("SoDienThoai", document.getElementById("SoDienThoai").value);
-        formData.append("Email", document.getElementById("Email").value);
-        formData.append("DiaChiGiaoHang", document.getElementById("DiaChiGiaoHang").value);
+    async function editKhachHangForm(id) {
         try {
-            let response = await fetch("/QlyKhach/CreateKhachHang", {
-                method: "POST",
-                body: formData
-            });
+            const response = await fetch(`/QlyKhach/GetKhachHangById/${id}`);
+            const result = await response.json();
 
-            let result = await response.json();
-            if (result.success) {
-                alert("Thêm khách hàng thành công!");
-                location.reload();
-            } else {
-                alert("Lỗi: " + result.message);
+            if (!result.success) {
+                alert(result.message || 'Lỗi khi tải thông tin khách hàng');
+                return;
             }
+
+            // Điền dữ liệu vào form
+            const kh = result.data;
+            document.getElementById("editKhachHangId").value = kh.id;
+            document.getElementById("editTenKhachHang").value = kh.ten;
+            document.getElementById("editSoDienThoai").value = kh.sdt;
+            document.getElementById("editEmail").value = kh.email;
+            document.getElementById("editDiaChiGiaoHang").value = kh.diachi;
+
+            // Hiển thị modal
+            new bootstrap.Modal(document.getElementById('editKhachHangModal')).show();
         } catch (error) {
             console.error("Lỗi:", error);
-            alert("Có lỗi xảy ra!");
+            alert("Có lỗi xảy ra khi tải thông tin khách hàng");
         }
-    });
+    }
 
     async function deleteKhachHang(id) {
         if (!confirm("Bạn có chắc muốn xóa khách hàng này?")) return;
 
         try {
-            let response = await fetch(`/QlyKhach/DeleteKhachHang/${id}`, {
+            const response = await fetch(`/QlyKhach/DeleteKhachHang/${id}`, {
                 method: "DELETE",
-                headers: { "Content-Type": "application/json" }
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
             });
 
-            let result = await response.json();
+            const contentType = response.headers.get("content-type");
+            const result = contentType?.includes("application/json") ? await response.json() : null;
+
+            if (!response.ok) {
+                throw new Error(result?.message || `HTTP error! status: ${response.status}`);
+            }
+
             if (result.success) {
-                alert("Xóa khách hàng thành công!");
-                location.reload();
-            } else {
-                alert("Lỗi: " + result.message);
+                // Xóa hàng khỏi bảng với hiệu ứng
+                const row = document.querySelector(`tr[data-id="${id}"]`);
+                if (row) {
+                    row.style.transition = "opacity 0.5s";
+                    row.style.opacity = "0";
+                    setTimeout(() => row.remove(), 500);
+                }
             }
         } catch (error) {
-            console.error("Lỗi:", error);
-            alert("Có lỗi xảy ra!");
+            console.error("Error:", error);
+            alert("Có lỗi xảy ra khi xóa khách hàng!");
         }
     }
-
-    function editKhachHangForm(id, ten, sdt, email, diaChi) {
-        document.getElementById("editKhachHangId").value = id;
-        document.getElementById("editTenKhachHang").value = ten;
-        document.getElementById("editSoDienThoai").value = sdt;
-        document.getElementById("editEmail").value = email;
-        document.getElementById("editDiaChiGiaoHang").value = diaChi;
-
-        var editModal = new bootstrap.Modal(document.getElementById("editKhachHangModal"));
-        editModal.show();
-    }
-
-    document.getElementById("editKhachHangForm").addEventListener("submit", async function (event) {
-        event.preventDefault();
-
-        let id = document.getElementById("editKhachHangId").value;
-        let updatedKhachHang = {
-            TenKhachHang: document.getElementById("editTenKhachHang").value,
-            SoDienThoai: document.getElementById("editSoDienThoai").value,
-            Email: document.getElementById("editEmail").value,
-            DiaChiGiaoHang: document.getElementById("editDiaChiGiaoHang").value
-        };
-
-        try {
-            let response = await fetch(`/QlyKhach/EditKhachHang/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedKhachHang)
-            });
-
-            let result = await response.json();
-            if (result.success) {
-                alert("Cập nhật khách hàng thành công!");
-                location.reload();
-            } else {
-                alert("Lỗi: " + result.message);
-            }
-        } catch (error) {
-            console.error("Lỗi:", error);
-            alert("Có lỗi xảy ra!");
-        }
-    });
 
     async function loadTaiKhoan(id) {
         try {
@@ -339,30 +308,163 @@
         addTaiKhoanModal.show();
     }
 
-    document.getElementById("addTaiKhoanForm").addEventListener("submit", async function (event) {
-        event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
 
-        let formData = new FormData();
-        formData.append("MaKhachHang", document.getElementById("MaKhachHang").value);
-        formData.append("Username", document.getElementById("Username").value);
-        formData.append("Password", document.getElementById("Password").value);
+        document.getElementById("addKhachHangForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.querySelector('.submit-text').classList.add('d-none');
+            submitButton.querySelector('.spinner-border').classList.remove('d-none');
 
-        try {
-            let response = await fetch("/QlyKhach/ThemTaiKhoan", {
-                method: "POST",
-                body: formData
-            });
+            try {
+                const formData = new FormData();
+                formData.append("TenKhachHang", document.getElementById("TenKhachHang").value);
+                formData.append("SoDienThoai", document.getElementById("SoDienThoai").value);
+                formData.append("Email", document.getElementById("Email").value);
+                formData.append("DiaChiGiaoHang", document.getElementById("DiaChiGiaoHang").value);
 
-            let result = await response.json();
-            if (result.success) {
-                alert("Thêm tài khoản thành công!");
-                location.reload();
-            } else {
-                alert("Lỗi: " + result.message);
+                const response = await fetch("/QlyKhach/CreateKhachHang", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    // Thêm row mới vào table
+                    const newRow = `
+                <tr data-id="${result.id}">
+                    <td class="d-none">${result.id}</td>
+                    <td>${formData.get('TenKhachHang')}</td>
+                    <td>
+                        <i class="fas fa-phone me-1 text-muted"></i>${formData.get('SoDienThoai')}<br>
+                        <i class="fas fa-envelope me-1 text-muted"></i>${formData.get('Email')}
+                    </td>
+                    <td>${formData.get('DiaChiGiaoHang')}</td>
+                    <td>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <button class="btn btn-sm btn-outline-warning" 
+                                onclick="editKhachHangForm('${result.id}', '${formData.get('TenKhachHang')}', 
+                                    '${formData.get('SoDienThoai')}', '${formData.get('Email')}', 
+                                    '${formData.get('DiaChiGiaoHang')}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" 
+                                onclick="deleteKhachHang('${result.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info" 
+                                onclick="loadTaiKhoan('${result.id}')">
+                                <i class="fas fa-user-lock"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>`;
+
+                    document.getElementById('customerList').insertAdjacentHTML('afterbegin', newRow);
+                    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+                    // Reset lại trạng thái body
+                    document.body.classList.remove('modal-open');
+                    document.body.style = '';
+                    $('#addKhachHangModal').modal('hide');
+                    this.reset();
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra khi thêm khách hàng!");
+            } finally {
+                submitButton.disabled = false;
+                submitButton.querySelector('.submit-text').classList.remove('d-none');
+                submitButton.querySelector('.spinner-border').classList.add('d-none');
             }
-        } catch (error) {
-            console.error("Lỗi:", error);
-            alert("Có lỗi xảy ra!");
-        }
+        });
+
+        document.getElementById("editKhachHangForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const id = document.getElementById("editKhachHangId").value;
+
+            try {
+                const formData = new FormData();
+                formData.append("Id", id);
+                formData.append("TenKhachHang", document.getElementById("editTenKhachHang").value);
+                formData.append("SoDienThoai", document.getElementById("editSoDienThoai").value);
+                formData.append("Email", document.getElementById("editEmail").value);
+                formData.append("DiaChiGiaoHang", document.getElementById("editDiaChiGiaoHang").value);
+
+                const response = await fetch("/QlyKhach/EditKhachHang", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    // Tìm hàng chứa khách hàng cần cập nhật
+                    const rows = document.querySelectorAll('#customerList tr');
+                    let targetRow = null;
+
+                    rows.forEach(row => {
+                        const idCell = row.querySelector('td.d-none');
+                        if (idCell && idCell.textContent === id) {
+                            targetRow = row;
+                        }
+                    });
+
+
+                    if (targetRow) {
+                        // Cập nhật dữ liệu mới
+                        const cells = targetRow.querySelectorAll('td');
+                        cells[1].textContent = formData.get('TenKhachHang');
+                        cells[2].innerHTML = `
+                    <i class="fas fa-phone me-1 text-muted"></i>${formData.get('SoDienThoai')}<br>
+                    <i class="fas fa-envelope me-1 text-muted"></i>${formData.get('Email')}
+                `;
+                        cells[3].textContent = formData.get('DiaChiGiaoHang');
+                    }
+
+                    // Đóng modal và thông báo
+
+                    const editModal = bootstrap.Modal.getInstance(document.getElementById('editKhachHangModal'));
+                    editModal.hide();
+                    alert('Cập nhật thông tin thành công!');
+
+                } else {
+                    alert(result.message || 'Cập nhật thất bại!');
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra khi cập nhật!");
+            }
+        });
+
+
+
+        document.getElementById("addTaiKhoanForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            let formData = new FormData();
+            formData.append("MaKhachHang", document.getElementById("MaKhachHang").value);
+            formData.append("Username", document.getElementById("Username").value);
+            formData.append("Password", document.getElementById("Password").value);
+
+            try {
+                let response = await fetch("/QlyKhach/ThemTaiKhoan", {
+                    method: "POST",
+                    body: formData
+                });
+
+                let result = await response.json();
+                if (result.success) {
+                    alert("Thêm tài khoản thành công!");
+                    location.reload();
+                } else {
+                    alert("Lỗi: " + result.message);
+                }
+            } catch (error) {
+                console.error("Lỗi:", error);
+                alert("Có lỗi xảy ra!");
+            }
+        });
     });
 </script>

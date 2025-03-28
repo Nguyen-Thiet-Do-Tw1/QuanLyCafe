@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyCafe.Models;
@@ -20,7 +21,7 @@ namespace QuanLyCafe.Controllers
             var khachHangs = await _context.KhachHang.ToListAsync();
             return View(khachHangs);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateKhachHang([FromForm] string TenKhachHang, [FromForm] string SoDienThoai, [FromForm] string Email, [FromForm] string DiaChiGiaoHang)
         {
@@ -56,35 +57,147 @@ namespace QuanLyCafe.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteKhachHang(string id)
         {
-            var khachHang = await _context.KhachHang.FindAsync(id);
-            if (khachHang == null)
+            try
             {
-                return Json(new { success = false, message = "Khách hàng không tồn tại!" });
+                var khachHang = await _context.KhachHang
+                    .Include(kh => kh.TaiKhoanKHs) // Thêm include để xử lý các liên kết
+                    .FirstOrDefaultAsync(kh => kh.Id == id);
+
+                if (khachHang == null)
+                {
+                    return Json(new { success = false, message = "Khách hàng không tồn tại!" });
+                }
+
+                // Xóa tất cả tài khoản liên quan trước
+                if (khachHang.TaiKhoanKHs.Any())
+                {
+                    _context.TaiKhoanKH.RemoveRange(khachHang.TaiKhoanKHs);
+                }
+
+                _context.KhachHang.Remove(khachHang);
+                await _context.SaveChangesAsync();
+
+                return new JsonResult(new { success = true, message = "Xóa thành công!" })
+                {
+                    StatusCode = 200 // Explicitly set status code
+                };
             }
-
-            _context.KhachHang.Remove(khachHang);
-            await _context.SaveChangesAsync();
-
-            return Json(new { success = true, message = "Xóa khách hàng thành công!" });
+            catch (DbUpdateException ex)
+            {
+                // Xử lý lỗi ràng buộc cơ sở dữ liệu
+                return new JsonResult(new
+                {
+                    success = false,
+                    message = "Không thể xóa do tồn tại dữ liệu liên quan!",
+                    details = ex.InnerException?.Message
+                })
+                {
+                    StatusCode = 500
+                };
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new
+                {
+                    success = false,
+                    message = "Lỗi server: " + ex.Message
+                })
+                {
+                    StatusCode = 500
+                };
+            }
         }
 
-        [HttpPut]
-        public async Task<IActionResult> EditKhachHang(string id, [FromBody] KhachHang updatedKhachHang)
+        [HttpPost]
+        public async Task<IActionResult> EditKhachHang(
+    [FromForm] string Id,
+    [FromForm] string TenKhachHang,
+    [FromForm] string SoDienThoai,
+    [FromForm] string Email,
+    [FromForm] string DiaChiGiaoHang)
         {
-            var khachHang = await _context.KhachHang.FindAsync(id);
-            if (khachHang == null)
+            try
             {
-                return Json(new { success = false, message = "Khách hàng không tồn tại!" });
+                Console.WriteLine($"ID: {Id}");
+                Console.WriteLine($"Tên: {TenKhachHang}");
+                Console.WriteLine($"SĐT: {SoDienThoai}");
+
+                var khachHang = await _context.KhachHang.FindAsync(Id);
+                if (khachHang == null)
+                {
+                    return Json(new { success = false, message = "Khách hàng không tồn tại!" });
+                }
+
+                // Validate
+                var validationErrors = new List<string>();
+                if (string.IsNullOrWhiteSpace(TenKhachHang)) validationErrors.Add("Tên là bắt buộc");
+                if (string.IsNullOrWhiteSpace(SoDienThoai)) validationErrors.Add("SĐT là bắt buộc");
+
+                if (validationErrors.Any())
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Lỗi validation",
+                        errors = validationErrors
+                    });
+                }
+
+                // Cập nhật
+                khachHang.TenKhachHang = TenKhachHang.Trim();
+                khachHang.SoDienThoai = SoDienThoai.Trim();
+                khachHang.Email = Email?.Trim() ?? "";
+                khachHang.DiaChiGiaoHang = DiaChiGiaoHang?.Trim() ?? "";
+
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Cập nhật thành công!" });
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex}");
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = "Lỗi server: " + ex.Message
+                });
+            }
+        }
 
-            khachHang.TenKhachHang = updatedKhachHang.TenKhachHang;
-            khachHang.SoDienThoai = updatedKhachHang.SoDienThoai;
-            khachHang.Email = updatedKhachHang.Email;
-            khachHang.DiaChiGiaoHang = updatedKhachHang.DiaChiGiaoHang;
+        [HttpGet]
+        public async Task<IActionResult> GetKhachHangById(string id)
+        {
+            try
+            {
+                var khachHang = await _context.KhachHang
+                    .FirstOrDefaultAsync(kh => kh.Id == id);
 
-            await _context.SaveChangesAsync();
+                if (khachHang == null)
+                {
+                    return NotFound(new { success = false, message = "Không tìm thấy khách hàng" });
+                }
 
-            return Json(new { success = true, message = "Cập nhật khách hàng thành công!" });
+                return Json(new
+                {
+                    success = true,
+                    data = new
+                    {
+                        id = khachHang.Id,
+                        ten = khachHang.TenKhachHang,
+                        sdt = khachHang.SoDienThoai,
+                        email = khachHang.Email,
+                        diachi = khachHang.DiaChiGiaoHang
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = "Lỗi server: " + ex.Message
+                });
+            }
         }
 
         [HttpGet]
@@ -133,7 +246,7 @@ namespace QuanLyCafe.Controllers
                 Id = newId,
                 Username = Username,
                 Password = Password,
-                QuyenId= "4",
+                QuyenId = "4",
                 MaKhachHang = MaKhachHang
             };
 
@@ -142,15 +255,5 @@ namespace QuanLyCafe.Controllers
 
             return Json(new { success = true, message = "Thêm tài khoản thành công!" });
         }
-
-
-
-
-
-
-
-
-
-
     }
 }

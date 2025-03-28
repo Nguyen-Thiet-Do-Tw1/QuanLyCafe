@@ -17,24 +17,8 @@ public class NguyenLieuController : Controller
         var quanCafes = await _context.QuanCafe.ToListAsync();
         return View(quanCafes);
     }
-    [HttpPost]
-    // public IActionResult ThemCoSo(QuanCafe model)
-    // {
-    //     if (ModelState.IsValid)
-    //     {
-    //         try
-    //         {
-    //             _context.QuanCafe.Add(model);
-    //             _context.SaveChanges();
-    //             return RedirectToAction("Index");
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             ModelState.AddModelError("", "Lỗi khi thêm cơ sở: " + ex.Message);
-    //         }
-    //     }
-    //     return View("Index", _context.QuanCafe.ToList());
-    // }
+
+
     [HttpGet]
     public async Task<IActionResult> GetNguyenLieunByQuan(string maQuan)
     {
@@ -68,24 +52,55 @@ public class NguyenLieuController : Controller
         return View(phieuNhapList);
     }
 
-    // GET: NguyenLieu/ChiTietPhieuNhap/{id}
+    // // GET: NguyenLieu/ChiTietPhieuNhap/{id}
+    // [HttpGet]
+    // public IActionResult ChiTietPhieuNhap(string id)
+    // {
+    //     var phieuNhap = _context.PhieuNhapHang
+    //         .Include(p => p.ChiTietPhieuNhap)
+    //             .ThenInclude(ct => ct.NguyenLieu)
+    //         .Include(p => p.QuanCafe)
+    //         .Include(p => p.NhanVien)
+    //         .Include(p => p.NhaCungCap)
+    //         .FirstOrDefault(p => p.Id == id);
+
+    //     if (phieuNhap == null)
+    //     {
+    //         return NotFound();
+    //     }
+
+    //     return View(phieuNhap);
+    // }
+    // NguyenLieuController.cs
     [HttpGet]
-    public IActionResult ChiTietPhieuNhap(string id)
+    public async Task<IActionResult> DanhSachPhieuNhap(string maQuan)
     {
-        var phieuNhap = _context.PhieuNhapHang
+        var phieuNhaps = await _context.PhieuNhapHang
+            .Include(p => p.NhaCungCap)
+            .Include(p => p.NhanVien)
+            .Include(p => p.ChiTietPhieuNhap)
+            .Where(p => p.MaQuan == maQuan)
+            .OrderByDescending(p => p.NgayLap)
+            .ToListAsync();
+
+        return View(phieuNhaps);
+    }
+    // NguyenLieuController.cs
+    [HttpGet]
+    public async Task<IActionResult> ChiTietPhieuNhap(string id)
+    {
+        var phieuNhap = await _context.PhieuNhapHang
             .Include(p => p.ChiTietPhieuNhap)
                 .ThenInclude(ct => ct.NguyenLieu)
-            .Include(p => p.QuanCafe)
-            .Include(p => p.NhanVien)
             .Include(p => p.NhaCungCap)
-            .FirstOrDefault(p => p.Id == id);
+            .Include(p => p.NhanVien)
+            .FirstOrDefaultAsync(p => p.Id == id);
 
-        if (phieuNhap == null)
-        {
-            return NotFound();
-        }
+        if (phieuNhap == null) return NotFound();
 
         return View(phieuNhap);
     }
-    
+
+
+
 }

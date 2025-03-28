@@ -256,7 +256,20 @@
     </div>
 </div>
 
+
         <style>
+            .form-control-static {
+                padding: 0.375rem 0.75rem;
+                border: 1px solid #dee2e6;
+                border-radius: 0.375rem;
+                background-color: #f8f9fa;
+            }
+
+            .table-bordered thead th {
+                background-color: #f8f9fa;
+                border-bottom: 2px solid #dee2e6;
+            }
+            
             /* Custom Table Styles */
             #nguyenLieuTable thead th {
                 font-weight: 600;
@@ -328,7 +341,7 @@
                         const maQuan = this.dataset.id;
                         const storeName = this.querySelector('h5').textContent;
                         selectedStoreBadge.textContent = storeName;
-                        btnNhapNL.href = `/NguyenLieu/NhapNguyenLieu?maQuan=${maQuan}`;
+                        btnNhapNL.href = `/NguyenLieu/DanhSachPhieuNhap?maQuan=${maQuan}`;
                         btnNhapNL.classList.remove('d-none');
 
                         loadingRow.classList.remove('d-none');

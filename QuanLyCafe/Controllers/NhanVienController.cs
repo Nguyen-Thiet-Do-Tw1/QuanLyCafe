@@ -202,6 +202,16 @@ public class NhanVienController : Controller
         }
     }
 
+    [HttpGet("GetByQuan")]
+    public async Task<IActionResult> GetByQuan(string maQuan)
+    {
+        var nhanViens = await _context.NhanVien
+            .Where(nv => nv.MaQuan == maQuan)
+            .Select(nv => new { nv.Id, nv.HoTen })
+            .ToListAsync();
+        return Json(nhanViens);
+    }
+
 
 
 

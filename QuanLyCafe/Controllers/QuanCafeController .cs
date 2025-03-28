@@ -98,7 +98,6 @@ public class QuanCafeController : Controller
             if (hasRelations)
                 return BadRequest(new { error = "Không thể xóa do tồn tại dữ liệu liên quan" });
 
-            _context.NhanVien.RemoveRange(coSo.NhanViens);
             _context.QuanCafe.Remove(coSo);
             await _context.SaveChangesAsync();
 
